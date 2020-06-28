@@ -15,6 +15,24 @@
                 <form action="{{ action('UnitController@store') }}" method="post">
                     @csrf
                     <div class="form-group">
+                        <label>Judul</label>
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
+                        @error('judul')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>Kota</label>
+                        <input type="text" class="form-control @error('kota') is-invalid @enderror" id="kota" name="kota" value="{{ old('kota') }}">
+                        @error('kota')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label>Tower</label>
                         <select class="form-control @error('tower_id') is-invalid @enderror" id="tower_id" name="tower_id">
                             <option value="">Pilih Tower</option>
@@ -191,6 +209,8 @@
                 <table class="table table-bordered table-hover mb-4" id="myTable">
                     <thead>
                         <tr>
+                        `   <th>Judul</th>
+                            <th>Kota</th>
                             <th>Tower</th>
                             <th>Lantai</th>
                             <th>No Unit</th>
@@ -203,6 +223,8 @@
                     <tbody>
                     @foreach($unit as $tp)
                         <tr>
+                            <td>{{ $tp->judul }}</td>
+                            <td>{{ $tp->kota }}</td>
                             <td>{{ $tp->tower->name }}</td>
                             <td>{{ $tp->lantai }}</td>
                             <td>{{ $tp->no_unit }}</td>
@@ -215,7 +237,6 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                        <a href="{{ url('/master/unit/'.$tp->_id) }}" class="dropdown-item">Show</a> 
                                         <button type="button" class="dropdown-item edit" data-toggle="modal" data-target="#editData" data-id="{{ $tp->_id }}" data-tower="{{ $tp->tower_id}}" data-tipe="{{ $tp->tipe_id }}" data-lantai="{{ $tp->lantai }}" data-harga="{{ $tp->harga }}" data-nounit="{{ $tp->no_unit }}" data-status="{{ $tp->status }}">Edit</button>
                                         <button type="button" class="dropdown-item delete" data-toggle="modal" data-target="#deleteData" data-id="{{ $tp->_id }}">Delete</button>
                                     </div>

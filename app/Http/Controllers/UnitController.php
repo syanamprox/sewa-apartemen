@@ -27,6 +27,8 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
+            'judul' =>'required',
+            'kota' =>'required',
             'tower_id' =>'required',
             'tipe_id' =>'required',
             'lantai' =>'required',
@@ -36,12 +38,14 @@ class UnitController extends Controller
         ]);
 
         Unit::create([
+            'judul' => $request->judul,
+            'kota' => $request->kota,
             'tower_id' => $request->tower_id,
             'tipe_id' => $request->tipe_id,
             'lantai' => $request->lantai,
             'harga' => $request->harga,
             'no_unit' => $request->no_unit,
-            'status' => $request->status
+            'status' => (int)$request->status
         ]);
 
         alert()->success('Selamat','Data berhasil ditambah.');
@@ -66,7 +70,7 @@ class UnitController extends Controller
             'lantai' => $request->lantai,
             'harga' => $request->harga,
             'no_unit' => $request->no_unit,
-            'status' => $request->status
+            'status' => (int)$request->status
         ]);
 
         alert()->success('Selamat','Data berhasil diupdate.');

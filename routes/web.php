@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@welcome');
 
 Route::get('/login', 'AuthController@index')->name('login');
 Route::post('/postlogin', 'AuthController@postlogin')->name('postlogin');
@@ -46,6 +44,7 @@ Route::group(['middleware' => 'auth'], function(){
 
         Route::resource('/transaksi/persewaan', 'PersewaanController');
         Route::post('/transaksi/persewaan/{persewaan}', 'PersewaanController@bayar');
+        Route::post('/transaksi/persewaan/{persewaan}/selesai', 'PersewaanController@selesai');
 
         Route::resource('/transaksi/invoice', 'InvoiceController');
 
@@ -55,6 +54,8 @@ Route::group(['middleware' => 'auth'], function(){
     });
 
     Route::get('/penghuni/dashboard', 'PagesController@penghuni')->name('penghunidsb');
+    Route::get('/penghuni/persewaan', 'PagesController@penghunisewa');
+    Route::post('/penghuni/persewaan/{persewaan}', 'PagesController@bayar');
 
 });
 

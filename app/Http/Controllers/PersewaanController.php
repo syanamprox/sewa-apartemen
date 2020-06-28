@@ -14,7 +14,7 @@ use alert;
 class PersewaanController extends Controller
 {
     public function index(){
-        $persewaan = Persewaan::all();
+        $persewaan = Persewaan::all()->sortByDesc('created_at');
 
         return view('transaksi.persewaan.index', compact('persewaan'));
     }
@@ -35,23 +35,23 @@ class PersewaanController extends Controller
         }
 
         $pembeli = User::where('level',3)->get();
-        $agen = User::where('level',2)->get();
-        $unit = Unit::where('status','0')->get();
+        $agen = User::where('level', 2)->get();
+        $unit = Unit::where('status', 0)->get();
         
         return view('transaksi.persewaan.create', compact('pembeli','agen','unit','nomor'));
     }
 
     public function store(Request $request){
 
-        // $this->validate($request,[
-        //     'no_pesanan' =>'required',
-        //     'user_id' => 'required',
-        //     'agen' =>'required',
-        //     'tanggal' =>'required',
-        //     'unit_id[]' =>'required',
-        //     'harga[]' =>'required',
-        //     'total' => 'required'
-        // ]);
+        $this->validate($request,[
+            'no_pesanan' =>'required',
+            'user_id' => 'required',
+            'agen' =>'required',
+            'tanggal' =>'required',
+            // 'unit_id[]' =>'required',
+            // 'harga[]' =>'required',
+            'total' => 'required'
+        ]);
 
         $noUrutAkhir = Persewaan::max('no_urut');
         $no_urut = abs($noUrutAkhir + 1);
@@ -67,6 +67,11 @@ class PersewaanController extends Controller
                     'persewaan_id' => $persewaan->_id,
                     'unit_id' => $request->unit_id[$i],
                     'harga' => $request->harga[$i]
+                ]);
+
+                Unit::where('_id', $request->unit_id[$i])
+                -> update([
+                    'status' => 1
                 ]);
             }
         }
@@ -105,6 +110,29 @@ class PersewaanController extends Controller
         
 
         alert()->success('Selamat','Pembayaran berhasil.');
+        return redirect('transaksi/persewaan');
+    }
+
+    public function selesai(Persewaan $persewaan){
+        
+        
+        Persewaan::where('_id', $persewaan->_id)
+        -> update([
+            'status' => 2
+        ]);
+
+        $persewaan = Persewaan::find($persewaan->_id);
+        
+        for($i = 0; $i < count($persewaan->detil); $i++){
+            if($persewaan->detil[0] != ''){
+                Unit::where('_id', $persewaan->detil[$i]->unit_id)
+                -> update([
+                    'status' => 0
+                ]);
+            }
+        }
+        
+        alert()->success('Selamat','Kontrak berhasil.');
         return redirect('transaksi/persewaan');
     }
 }

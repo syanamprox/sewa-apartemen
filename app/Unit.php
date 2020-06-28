@@ -10,7 +10,7 @@ class Unit extends Eloquent
     protected $collection = 'unit';
 
     protected $fillable = [
-        'tower_id','tipe_id','lantai','harga','no_unit','status'
+        'tower_id','tipe_id','lantai','harga','no_unit','status','judul','kota'
     ];
 
     public function tower(){

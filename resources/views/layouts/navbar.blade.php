@@ -197,6 +197,8 @@
                                             Admin
                                         @elseif(Auth::user()->level == 2)
                                             Agen
+                                        @elseif(Auth::user()->level === 3 && Auth::user()->active === 0)
+                                            Pelamar
                                         @elseif(Auth::user()->level == 3)
                                             Penghuni
                                         @endif

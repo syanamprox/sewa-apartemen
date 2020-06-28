@@ -278,7 +278,6 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                        <a href="{{ url('/master/admin/'.$adm->_id) }}" class="dropdown-item">Show</a> 
                                         <button type="button" class="dropdown-item edit" data-toggle="modal" data-target="#editData" data-id="{{ $adm->_id }}" data-name="{{ $adm->name }}" data-email="{{ $adm->email }}" data-noktp="{{ $adm->no_ktp }}" data-ttl="{{ $adm->tanggal_lahir }}" data-alamat="{{ $adm->alamat }}" data-telepon="{{ $adm->telepon }}" data-gaji="{{ $adm->gaji }}" data-image="{{ $adm->getImageAdmin() }}">Edit</button>
                                         <button type="button" class="dropdown-item delete" data-toggle="modal" data-target="#deleteData" data-id="{{ $adm->_id }}">Delete</button>
                                     </div>
@@ -333,6 +332,8 @@ $(document).ready( function () {
         $('#editForm').attr('action','/master/admin/'+id);
     });
 
+    // document.getElementById("block").disabled;
+
     $(document).on('click', '.delete', function () {
 
         var id = $(this).data('id');
@@ -349,7 +350,6 @@ $(document).ready( function () {
     flatpickr(document.getElementById('tanggal_lahir_edit'), {
         dateFormat: "d-m-Y",
     });
-
 });
 </script>
 @stop

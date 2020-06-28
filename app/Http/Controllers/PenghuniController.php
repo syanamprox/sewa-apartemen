@@ -27,7 +27,7 @@ class PenghuniController extends Controller
         $this->validate($request,[
             'name' =>'required',
             'email' =>'required',
-            'password' => 'required|size:6',
+            'password' => 'required',
             'no_ktp' => 'required|size:16',
             'tanggal_lahir_add' => 'required',
             'alamat' => 'required',

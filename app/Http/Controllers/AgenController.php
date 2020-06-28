@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use alert;
+use Auth;
 use App\User;
 
 class AgenController extends Controller
@@ -25,7 +26,7 @@ class AgenController extends Controller
         $this->validate($request,[
             'name' =>'required',
             'email' =>'required',
-            'password' => 'required|size:6',
+            'password' => 'required',
             'no_ktp' => 'required|size:16',
             'tanggal_lahir_add' => 'required',
             'alamat' => 'required',

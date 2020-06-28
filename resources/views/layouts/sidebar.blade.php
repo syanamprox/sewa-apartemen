@@ -6,7 +6,15 @@
             <div class="user-info">
                 <!-- <img src="{{ asset('templates/assets/img/90x90.jpg') }}" alt="avatar"> -->
                 <h6 class="">{{ Auth::user()->name }}</h6>
-                <p class="">Project Leader</p>
+                <p class="">
+                    @if(Auth::user()->level == 1)
+                        Admin
+                    @elseif(Auth::user()->level == 2)
+                        Agen
+                    @elseif(Auth::user()->level == 3)
+                        Penghuni
+                    @endif
+                </p>
             </div>
         </div>
         <div class="shadow-bottom"></div>

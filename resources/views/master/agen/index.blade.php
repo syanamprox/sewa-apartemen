@@ -278,7 +278,6 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                        <a href="{{ url('/master/agen/'.$agn->_id) }}" class="dropdown-item">Show</a> 
                                         <button type="button" class="dropdown-item edit" data-toggle="modal" data-target="#editData" data-id="{{ $agn->_id }}" data-name="{{ $agn->name }}" data-email="{{ $agn->email }}" data-noktp="{{ $agn->no_ktp }}" data-ttl="{{ $agn->tanggal_lahir }}" data-alamat="{{ $agn->alamat }}" data-telepon="{{ $agn->telepon }}" data-gaji="{{ $agn->gaji }}" data-image="{{ $agn->getImageAdmin() }}">Edit</button>
                                         <button type="button" class="dropdown-item delete" data-toggle="modal" data-target="#deleteData" data-id="{{ $agn->_id }}">Delete</button>
                                     </div>

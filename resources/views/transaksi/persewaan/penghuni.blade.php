@@ -26,16 +26,13 @@
                                             <p class="invoice-customer-name"><span>To:</span> {{ $psw->user->name }}</p>
                                             <p class="invoice-generated-date">Date: {{ $psw->tanggal }}</p>
                                             @if($psw->status == 0)
-                                                <form action="{{ url('transaksi/persewaan/'.$psw->_id) }}" method="post">
+                                                <form action="{{ url('penghuni/persewaan/'.$psw->_id) }}" method="post">
                                                     @csrf
                                                     <button type="submit" class="badge outline-badge-danger shadow-none bayar">Bayar</button>
                                                 </form>
                                             @elseif($psw->status == 1)
                                                 <span style="margin-bottom:5px;" class="badge outline-badge-success shadow-none">Lunas</span>
-                                                <form action="{{ url('transaksi/persewaan/'.$psw->_id.'/selesai') }}" method="post">
-                                                    @csrf
-                                                    <button type="submit" class="badge outline-badge-danger shadow-none bayar">Kontrak Selesai</button>
-                                                </form>
+                                                <span class="badge outline-badge-primary shadow-none">Dalam Kontrak</span>
                                             @else
                                                 <span style="margin-bottom:5px;" class="badge outline-badge-success shadow-none">Lunas</span>
                                                 <span style="margin-bottom:5px;" class="badge outline-badge-success shadow-none">Selesai</span>

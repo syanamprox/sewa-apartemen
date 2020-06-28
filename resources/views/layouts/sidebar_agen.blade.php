@@ -6,13 +6,21 @@
             <div class="user-info">
                 <!-- <img src="{{ asset('templates/assets/img/90x90.jpg') }}" alt="avatar"> -->
                 <h6 class="">{{ Auth::user()->name }}</h6>
-                <p class="">Project Leader</p>
+                <p class="">
+                    @if(Auth::user()->level == 1)
+                        Admin
+                    @elseif(Auth::user()->level == 2)
+                        Agen
+                    @elseif(Auth::user()->level == 3)
+                        Penghuni
+                    @endif
+                </p>
             </div>
         </div>
         <div class="shadow-bottom"></div>
         <ul class="list-unstyled menu-categories" id="accordionExample">
             <li class="menu">
-                <a href="{{ url('agen/dashboard') }}" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ url('admin/dashboard') }}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                         <span>Dashboard</span>
@@ -110,7 +118,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="components" data-parent="#accordionExample">
+                <ul class="collapse submenu list-unstyled" id="components" data-parent="#accordionExample"> 
                     <li>
                         <a href="{{ url('master/penghuni') }}"> Penghuni  </a>
                     </li>
@@ -136,14 +144,11 @@
                         <a href="{{ url('master/tower') }}"> Tower </a>
                     </li>
                     <li>
-                        <a href="{{ url('master/apartemen') }}"> Apartemen </a>
+                        <a href="{{ url('master/unit') }}"> Unit </a>
                     </li>
                     <li>
-                        <a href="{{ url('master/tipe') }}element_badges.html"> Tipe </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('master/fasilitas') }}"> Fasilitas </a>
-                    </li>                            
+                        <a href="{{ url('master/tipe') }}"> Tipe </a>
+                    </li>                           
                 </ul>
             </li>
 
@@ -152,41 +157,44 @@
             </li>
 
             <li class="menu">
-                <a href="table_basic.html" aria-expanded="false" class="dropdown-toggle">
+                <a href="#persewaan" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                         <span>Pesanan Persewaan</span>
                     </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
                 </a>
-            </li>
+                <ul class="collapse submenu list-unstyled" id="persewaan" data-parent="#accordionExample">
+                    <li>
+                        <a href="{{ url('transaksi/persewaan') }}"> List </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('transaksi/persewaan/create') }}"> Tambah </a>
+                    </li>                        
+                </ul>
+            </li>   
 
             <!-- <li class="menu">
-                <a href="#datatables" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ url('transaksi/invoice') }}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                         <span>Invoice Persewaan</span>
                     </div>
                 </a>
             </li> -->
+
 
             <li class="menu menu-heading">
                 <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>AKUN</span></div>
             </li>
 
             <li class="menu">
-                <a href="table_basic.html" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ url('akun/saldo') }}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                         <span>Saldo Pengguna</span>
-                    </div>
-                </a>
-            </li>
-
-            <li class="menu">
-                <a href="#datatables" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                        <span>Log Transaksi</span>
                     </div>
                 </a>
             </li>
