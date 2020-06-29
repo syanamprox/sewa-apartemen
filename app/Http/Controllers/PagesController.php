@@ -69,8 +69,9 @@ class PagesController extends Controller
     {
         // $unit = Unit::where('status', 0)->get();
         $unit = Unit::where('status', 0)->get();
+        $title = 'Home';
 
-        return view('welcome', compact('unit'));
+        return view('welcome', compact('unit','title'));
     }
 
     public function penghunisewa(){
@@ -110,5 +111,27 @@ class PagesController extends Controller
 
         alert()->success('Selamat','Pembayaran berhasil.');
         return redirect('penghuni/persewaan');
+    }
+    
+    public function about()
+    {
+        $title = 'About';
+
+        return view('about', compact('title'));
+    }
+
+    public function team()
+    {
+        $title = 'Our Team';
+        
+        return view('team', compact('title'));
+    }
+
+    public function unit()
+    {
+        $unit = Unit::all();
+        $title = 'Unit';
+
+        return view('unit', compact('unit','title'));
     }
 }

@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'PagesController@welcome');
+Route::get('/about', 'PagesController@about');
+Route::get('/team', 'PagesController@team');
+Route::get('/unit', 'PagesController@unit');
 
 Route::get('/login', 'AuthController@index')->name('login');
 Route::post('/postlogin', 'AuthController@postlogin')->name('postlogin');
